@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        // -- to use ECMAScript module syntax ( import / export )
+        "module": "NodeNext",
+        // -- to use modern JSX transform ( no need to import React )
+        "jsx": "react-jsx",
+        // -- to enable all strict type-checking options
+        "strict": true,
+        // -- to check types in node_modules
+        "skipLibCheck": false,
+        // -- to generate no compiled files ( handled by Vite )
+        "noEmit": true,
+        // -- to allow .ts and .tsx imports ( requires noEmit )
+        "allowImportingTsExtensions": true
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "src/styles"
+    ]
+}

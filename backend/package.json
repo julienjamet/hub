@@ -2,7 +2,7 @@
     "name": "hub_api",
     "author": "Julien Jamet",
     "private": true,
-    "version": "0.0.1",
+    "version": "0.0.2",
     "type": "module",
     "scripts": {
         "dev": "concurrently -n 'TS,JS' -c 'blue,yellow' -p [{name}] 'tsc --watch' 'nodemon --quiet ./dist/index.js'",
@@ -10,9 +10,13 @@
         "start": "node ./dist/index.js"
     },
     "dependencies": {
-        "express": "^4.21.1"
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.7",
+        "express": "^4.21.1",
+        "helmet": "^8.0.0"
     },
     "devDependencies": {
+        "@types/cors": "^2.8.17",
         "@types/express": "^5.0.1",
         "@types/node": "^22.7.7",
         "concurrently": "^9.0.1",

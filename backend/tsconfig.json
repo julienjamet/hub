@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        // -- to use ECMAScript module syntax ( import / export ) without strict Node.js resolution
+        "module": "ESNext",
+        // -- to resolve modules like Node.js would
+        "moduleResolution": "node",
+        // -- to allow default imports from CommonJS modules ( without default exports )
+        "esModuleInterop": true,
+        // -- to enable all strict type-checking options
+        "strict": true,
+        // -- to forbid compilation if an error is found
+        "noEmitOnError": true,
+        // -- to check types in node_modules
+        "skipLibCheck": false,
+        // -- destination of compiled JS files
+        "outDir": "./dist"
+    },
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}

@@ -12,6 +12,10 @@ import { ansi } from './enums/enums.js';
 /********************************************METHODS*/
 import { setCorsAllowedOrigin, setHelmetConfig } from './methods/methods.js';
 /****************************************************/
+
+/****************************************MAIN ROUTER*/
+import MainRouter from './routes/router.js';
+/****************************************************/
 /************************************************************************/
 
 
@@ -36,6 +40,11 @@ const helmetOptions: object = setHelmetConfig();
 
 app.use(cors(corsOptions));
 app.use(helmet(helmetOptions));
+/****************************************************/
+
+
+/****************************************MAIN ROUTER*/
+MainRouter(app);
 /****************************************************/
 
 

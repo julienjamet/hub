@@ -1,0 +1,30 @@
+/****************************************************************IMPORTS*/
+@use '../../colors/colors';
+/************************************************************************/
+
+
+/*****************************************************************NAVBAR*/
+@mixin navbar {
+    .navbar {
+        display: flex;
+        justify-content: space-evenly;
+        
+        a {
+            width: 25vw;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: colors.$police--primary;
+            text-decoration: none;
+            background: linear-gradient(to bottom, colors.$primary, colors.$secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 0 0 1.25rem 1.25rem;
+
+            &:hover {
+                background: linear-gradient(to bottom, colors.$secondary, colors.$secondary);
+                box-shadow: 0.0625rem 0.0625rem 0.9375rem colors.$secondary, -0.0625rem -0.0625rem 0.9375rem colors.$secondary;
+            }
+        }
+    }
+}
+/************************************************************************/

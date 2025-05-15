@@ -22,7 +22,16 @@ export const Projects: FC = (): ReactElement => {
     /******************************EFFECTS & METHODS*/
     // [ GET PROJECTS ] EFFECT
     useEffect((): void => {
-        axios.get(`${import.meta.env.VITE_HUB_DEV_HOSTNAME}:${import.meta.env.VITE_HUB_DEV_PORT}/projects/${location}`)
+        let baseURL: string = '';
+
+        if (import.meta.env.MODE === 'development') {
+            baseURL = `${import.meta.env.VITE_HUB_DEV_HOSTNAME || ''}:${import.meta.env.VITE_HUB_DEV_PORT || ''}`;
+        }
+        else if (import.meta.env.MODE === 'production') {
+            baseURL = import.meta.env.VITE_HUB_PREPROD_URL || '';
+        }
+
+        axios.get(`${baseURL}/projects/${location}`)
 
             .then((response: AxiosResponse): void => setProjects(response.data))
 

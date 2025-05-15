@@ -6,6 +6,7 @@ import React, { ReactElement } from 'react';
 
 /*********************************************STYLES*/
 import './styles/index.scss';
+import '@fortawesome/fontawesome-free/css/all.css';
 /****************************************************/
 
 /*****************************************COMPONENTS*/

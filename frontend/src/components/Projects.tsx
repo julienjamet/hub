@@ -73,16 +73,20 @@ export const Projects: FC = (): ReactElement => {
                         projects.map((project: IHubProject, index: number): ReactNode =>
                             <div className={`clickable p${index}`}>
                                 <div className='image'>
-                                    <img src={`./training_page/p${index + 1}.png `} alt={`Projet ${project.name}`} />
+                                    <img src={project.image} alt={`Projet ${project.name}`} />
                                 </div>
 
                                 <div className='skills'>
                                     {
                                         project.skills.map((skill: ISkill): ReactNode =>
-                                            <i
-                                                className={skill.icon}
-                                                title={skill.name}
-                                            />
+                                            !skill.icon.includes('base64') ? (
+                                                <i
+                                                    className={skill.icon}
+                                                    title={skill.name}
+                                                />
+                                            ) : (
+                                                <img src={skill.icon} alt={`Projet ${project.name}`} />
+                                            )
                                         )
                                     }
                                 </div>

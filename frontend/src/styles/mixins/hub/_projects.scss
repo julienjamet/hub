@@ -149,6 +149,10 @@
 
     .clickable:hover {
         box-shadow: 1px 1px 10px colors.$secondary, -1px -1px 10px colors.$secondary;
+
+        @media all and (max-width: 768px) {
+            box-shadow: 1px 1px 10px colors.$police--secondary, -1px -1px 10px colors.$police--secondary;
+        }
     }
 }
 
@@ -157,6 +161,7 @@
         position: absolute;
         top: 0;
         height: 100vh;
+        width: 100vw;
         background: rgba($color: colors.$primary, $alpha: 0.75);
         animation: appearFromTop 600ms both;
         

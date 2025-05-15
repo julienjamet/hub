@@ -19,6 +19,7 @@ const hubProject: Object = {
     number: { type: Number, required: false },
     name: { type: String, required: true },
     image: { type: String, required: true },
+    category: { type: String, required: true },
     subject: { type: String, required: true },
     skills: { type: [Object], required: true },
     difficulty: { type: Number, required: true },

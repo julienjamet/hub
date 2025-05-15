@@ -1,12 +1,212 @@
 /****************************************************************IMPORTS*/
 @use '../../colors/colors';
+@use '../../keyframes/keyframes';
 /************************************************************************/
 
 
 /***************************************************************PROJECTS*/
+@mixin appear {
+    &.p1 {
+        animation: appear 1000ms 200ms both;
+    }
+    
+    &.p2 {
+        animation: appear 1000ms 400ms both;
+    }
+    
+    &.p3 {
+        animation: appear 1000ms 600ms both;
+    }
+    
+    &.p4 {
+        animation: appear 1000ms 800ms both;
+    }
+    
+    &.p5 {
+        animation: appear 1000ms 1000ms both;
+    }
+    
+    &.p6 {
+        animation: appear 1000ms 1200ms both;
+    }
+}
+
+@mixin skillsIcons {
+    i {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 60px;
+        background-color: colors.$police--secondary;
+        padding-top: 1px;
+        border-radius: 0.5rem;
+        margin: 0 1rem;
+    
+        &.fa-html5 {
+            color: colors.$html;
+        }
+    
+        &.fa-css {
+            color: colors.$css;
+        }
+    
+        &.fa-sass {
+            color: colors.$sass;
+        }
+    
+        &.fa-git-alt {
+            color: colors.$git;
+        }
+    
+        &.fa-github {
+            color: colors.$github;
+        }
+    
+        &.fa-eye-low-vision {
+            font-size: 24px;
+            color: colors.$accessibility;
+        }
+    
+        &.fa-gauge-high {
+            font-size: 24px;
+            color: colors.$performances;
+        }
+    
+        &.fa-js {
+            color: colors.$javascript;
+        }
+    
+        &.fa-node {
+            color: colors.$node;
+        }
+
+        &.fa-react {
+            color: colors.$react;
+        }
+    }
+    
+    img {
+        height: 41px;
+        width: 60px;
+        background-color: colors.$secondary;
+        border-radius: 0.5rem;
+        margin: 0 1rem;
+        object-fit: contain;
+    }
+}
+
+// -- 2 previous mixins used below
+
+@mixin clickable {
+    .clickable {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20vw;
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: 1px;
+        color: colors.$secondary;
+        background: linear-gradient(to top, colors.$secondary, transparent);
+        padding: 6vh 3vw;
+        border-radius: 1rem;
+        margin-top: 2rem;
+        transition: letter-spacing 2000ms;
+        cursor: pointer;
+    }
+}
+
+@mixin projectCard {
+    .clickable {
+        flex-direction: column;
+        height: 25vh;
+        min-width: 300px;
+
+        @include appear;
+    
+        .image {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex: 4;
+    
+            img {
+                max-width: 80%;
+                border-radius: 1rem;
+            }
+        }
+                    
+        .skills {
+            display: flex;
+            flex: 1;
+                        
+            @include skillsIcons;
+        }
+    }
+
+    @include clickable;
+
+    .clickable:hover {
+        box-shadow: 1px 1px 10px colors.$secondary, -1px -1px 10px colors.$secondary;
+    }
+}
+
 @mixin projects {
     .projects {
-        color: colors.$police--secondary;
+        position: absolute;
+        top: 0;
+        height: 100vh;
+        background: rgba($color: colors.$primary, $alpha: 0.75);
+        animation: appearFromTop 600ms both;
+        
+        .projects_presentation {
+            color: colors.$police--secondary;
+
+            h2 {
+                display: flex;
+                align-items: center;
+                
+                @include clickable;
+                
+                .clickable {
+                    width: 30px;
+                    font-size: 16px;
+                    text-decoration: none;
+                    color: colors.$police--secondary;
+                    border-radius: 100%;
+                    padding: 7px 0 6px 0;
+                    margin: 0 2rem;
+                    transition: all 600ms;
+                    
+                    &:hover {
+                        box-shadow: 1px 1px 10px colors.$secondary, -1px -1px 10px colors.$secondary;
+                    }
+                }
+                
+                .title {
+                    padding-top: 2px;
+                }
+            }
+            
+            .text {
+                display: flex;
+                flex-direction: column;
+                padding-left: 5%;
+                
+                span:nth-child(1) {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+
+        .cards {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            padding-bottom: 20px;
+
+            @include projectCard;
+        }
     }
 }
 /************************************************************************/

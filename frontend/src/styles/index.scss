@@ -5,9 +5,9 @@
 
 /******************************************************************INDEX*/
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
     margin: 0;
-
+    
     @include _.allMixins;
 }
 /************************************************************************/

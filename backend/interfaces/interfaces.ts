@@ -9,9 +9,10 @@ interface IStarting {
 };
 
 export interface IHubProject {
-    number?: number,
+    number: number,
     name: string,
     image: string,
+    category: string,
     subject: string,
     skills: ISkill[],
     difficulty: number,

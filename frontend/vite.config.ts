@@ -21,7 +21,14 @@ const preview: IPreview = {
 };
 /****************************************************/
 
+// const server: IServer = {
+//     proxy: {
+//         '/projects': `${process.env.NETWORK_URL}:${port}`,
+//     },
+// };
+
 const viteConfigOptions: IViteConfigOptions = {
+    // server: server,
     preview: preview
 };
 

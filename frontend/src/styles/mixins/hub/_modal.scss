@@ -1,0 +1,157 @@
+@use './clickable';
+
+@mixin modalCross {
+    .cross {
+        align-self: flex-end;
+        font-size: 20px;
+        font-weight: bold;
+        color: #9ee8ff;
+        padding: 7px 10px 8px 12px;
+        border-bottom: 1px solid #9ee8ff;
+        border-radius: 0 1rem;
+        margin: -25px -25px 0 0;
+        cursor: pointer;
+        transition: all 600ms;
+
+        &:hover {
+            color: white;
+            background: linear-gradient(to top, rgba($color: #9ee8ff, $alpha: 0.25), transparent);
+        }
+    }
+}
+
+@mixin modal {
+    .modalBlur {
+        position: fixed;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        animation: blur 600ms forwards ease-out;
+
+        .modal {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            height: 80vh;
+            width: 40%;
+            font-weight: bold;
+            color: black;
+            background: radial-gradient(circle, #9ee8ff, transparent);
+            padding: 25px;
+            box-shadow: 1px 1px 2px #9ee8ff, -1px -1px 2px #9ee8ff;
+            border-radius: 1rem;
+            animation: appearFromLeft 400ms ease-out;
+
+            @media all and (max-width: 768px) {
+                height: 90vh;
+                width: 90%;
+            }
+
+            @include modalCross;
+
+            h2 {
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                flex: 1;
+                width: 100%;
+                padding: 20px 0;
+                background: radial-gradient(circle, #9ee8ff, transparent);
+                box-shadow: 2px 0 4px rgba($color: #000000, $alpha: 0.2);
+
+                img {
+                    width: 14rem;
+                    border-radius: 1rem;
+                }
+
+                @media all and (max-width:768px) {
+                    flex-direction: column;
+
+                    img {
+                        margin-top: 10px;
+                    }
+                }
+            }
+
+            .project_information {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                flex: 5;
+                font-size: 1.2em;
+                width: 100%;
+                background: radial-gradient(circle, #9ee8ff, transparent);
+                padding: 0 5% 6% 5%;
+                box-shadow: 2px 0 4px rgba($color: #000000, $alpha: 0.2);
+                
+                .difficulty {
+                    display: flex;
+
+                    .stars {
+                        padding-left: 0.5rem;
+
+                        i {
+                            color: rgba($color: black, $alpha: 0.75);
+                            
+                            &.bright {
+                                color: $star--on;
+                            }
+                        }
+                    }
+                }
+
+                .starting_materials {
+                    ul {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        height: 100%;
+    
+                        li {
+                            a {
+                                text-decoration: underline;
+                                transition: all 600ms;
+    
+                                &:hover {
+                                    color: white
+                                }
+                            }
+                        }
+    
+                    }
+
+                    @media all and (max-width:768px) {
+                        display: none;
+                    }
+                }
+            }
+
+            @include clickable;
+
+            .clickable {
+                flex: 1;
+                width: 30%;
+                font-size: 1.5rem;
+                color: black;
+                background: radial-gradient(circle, #9ee8ff, transparent);
+                padding: 0;
+                margin: 5rem 0 2rem 0;
+                box-shadow: 1px 0 2px rgba($color: #000000, $alpha: 0.2);
+                transition: all 600ms;
+
+                &:hover {
+                    color: white;
+                }
+
+                @media all and (max-width:768px) {
+                    padding: 10px 0;
+                    width: 80%;
+                }
+            }
+        }
+    }    
+}

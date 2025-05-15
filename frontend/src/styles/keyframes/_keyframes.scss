@@ -1,3 +1,9 @@
+/****************************************************************IMPORTS*/
+@use '../colors/colors';
+/************************************************************************/
+
+
+/**************************************************************KEYFRAMES*/
 @keyframes appear {
     0% {
         opacity: 0;
@@ -17,3 +23,45 @@
         opacity: 1;
     }
 }
+/************************************************************************/
+
+
+
+
+
+
+
+
+// @keyframes appearFromLeft {
+//     0% {
+//         transform: translateX(-100%);
+//         opacity: 0;
+//     }
+//     100% {
+//         transform: translateX(0%);
+//         opacity: 1;
+//     }
+// }
+
+
+// @keyframes blur {
+//     0% {
+//         backdrop-filter: blur(0);
+//     }
+//     100% {
+//         background: rgba($color: #9ee8ff, $alpha: 0.1);
+//         backdrop-filter: blur(4px);
+//     }
+// }
+
+// @keyframes stretch {
+//     0% {
+//         letter-spacing: normal;
+//     }
+//     50% {
+//         letter-spacing: 8px;
+//     }
+//     100% {
+//         letter-spacing: normal;
+//     }
+// }

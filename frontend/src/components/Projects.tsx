@@ -8,6 +8,10 @@ import axios, { AxiosResponse, AxiosError } from 'axios';
 /*****************************************INTERFACES*/
 import { IHubProject, ISkill } from '../interfaces/data/data.ts';
 /****************************************************/
+
+/*****************************************COMPONENTS*/
+//import { Modal } from './Modal.tsx';
+/****************************************************/
 /************************************************************************/
 
 
@@ -17,6 +21,9 @@ export const Projects: FC = (): ReactElement => {
     const location: string = useLocation().pathname.split('/')[1];
 
     const [projects, setProjects] = useState<IHubProject[]>([]);
+    //const [selectedProject, setSelectedProject] = useState<IHubProject>();
+
+    //const [openModal, setOpenModal] = useState<boolean>(false);
     /************************************************/
 
     /******************************EFFECTS & METHODS*/
@@ -37,11 +44,27 @@ export const Projects: FC = (): ReactElement => {
 
             .catch((error: AxiosError): void => console.error(error));
     }, [location]);
+
+
+    // const selectProject = (project: IHubProject): void => {
+    //     setSelectedProject(project);
+
+    //     setOpenModal(true);
+    // };
     /************************************************/
 
     /*****************************************RETURN*/
     return (
         <>
+            {/* {
+                selectedProject && openModal && (
+                    <Modal
+                        setOpenModal={setOpenModal}
+                        project={selectedProject}
+                    />
+                )
+            } */}
+
             <div className='projects'>
                 <div className='projects_presentation'>
                     <h2>
@@ -80,7 +103,10 @@ export const Projects: FC = (): ReactElement => {
                 <div className='cards'>
                     {
                         projects.map((project: IHubProject, index: number): ReactNode =>
-                            <div className={`clickable p${index}`}>
+                            <div
+                                className={`clickable p${index}`}
+                            //onClick={(): void => selectProject(project)}
+                            >
                                 <div className='image'>
                                     <img src={project.image} alt={`Projet ${project.name}`} />
                                 </div>

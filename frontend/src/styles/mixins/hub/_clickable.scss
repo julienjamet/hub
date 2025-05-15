@@ -1,0 +1,21 @@
+/**************************************************************CLICKABLE*/
+@mixin clickable {
+    .clickable {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 25vw;
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: 1px;
+        color: $secondary;
+        background: linear-gradient(to top, #9ee8ff, transparent);
+        padding: 6vh 3vw;
+        border-radius: 1rem;
+        margin-top: 2rem;
+        transition: letter-spacing 2000ms;
+        //animation: stretch 6000ms infinite;
+        cursor: pointer;
+    }
+}
+/************************************************************************/

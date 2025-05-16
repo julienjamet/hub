@@ -1,65 +1,77 @@
-#!/bin/bash
-
-set -e  # Stop the script if any command fails
-
+echo ""
+echo "/********************************************************/"
 echo "🔍  Step 1: Running security audit..."
-npm audit --omit=dev --audit-level high
+echo "/********************************************************/"
+echo ""
 
-echo "✅ No production vulnerabilities found."
-
-echo "🧹  Step 2: Running linter..."
-npm run lint
-
-echo "✅ Lint passed without errors."
-
-echo "🏗️  Step 3: Building the project..."
-npm run build
-
-echo "✅ Build completed successfully."
+npm audit --omit=dev --audit-level high || { echo "❌ Audit failed. Aborting."; exit 1; }
 
 echo ""
+echo "✅ No production vulnerabilities found."
+echo ""
+
+echo ""
+echo "/********************************************************/"
+echo "🧹  Step 2: Running linter..."
+echo "/********************************************************/"
+echo ""
+
+npm run lint || { echo "❌ Lint failed. Aborting."; exit 1; }
+
+echo ""
+echo "✅ Lint passed without errors."
+echo ""
+
+echo ""
+echo "/********************************************************/"
+echo "🏗️  Step 3: Building the project..."
+echo "/********************************************************/"
+echo ""
+
+npm run build || { echo "❌ Build failed. Aborting."; exit 1; }
+
+echo ""
+echo "✅ Build completed successfully."
+echo ""
+
+echo ""
+echo "/********************************************************/"
 echo "📦 Step 4: Choose version bump type"
+echo "/********************************************************/"
 echo "   [p] patch (bug fixes)"
 echo "   [m] minor (backward-compatible features)"
 echo "   [M] major (breaking changes)"
-
 read -p "👉 Your choice (p/m/M): " choice
 
 case "$choice" in
-  p|P)
-    bump="patch"
-    ;;
-  m)
-    bump="minor"
-    ;;
-  M)
-    bump="major"
-    ;;
-  *)
-    echo "❌ Invalid choice. Aborting."
-    exit 1
-    ;;
+  p|P) bump="patch" ;;
+  m) bump="minor" ;;
+  M) bump="major" ;;
+  *) echo "❌ Invalid choice. Aborting."; exit 1 ;;
 esac
 
+echo ""
 echo "🔢 Bumping version with 'npm version $bump'..."
-npm version $bump
-
-version=$(node -p "require('./package.json').version")
+npm version $bump || { echo "❌ Version bump failed. Aborting."; exit 1; }
 
 echo ""
-echo "🛑 Step 5: Manually stage the files you want to commit (e.g. git add ...)"
+echo "/********************************************************/"
+echo "🛑 Step 5: Manually stage the files you want to commit"
+echo "/********************************************************/"
+echo "👉 Use 'git add ...' for precise control."
 read -p "Press [Enter] when you're ready to continue..."
 
-# Check if anything is staged for commit
-if git diff --cached --quiet; then
+if [[ -z $(git diff --cached --name-only) ]]; then
   echo "❌ No files staged. Aborting commit."
   exit 1
 fi
 
-read -p "📝 Commit message: " message
-
-echo "💾 Committing and tagging..."
+read -p "💬 Commit message: " message
 git commit -m "$message"
-git tag "v$version"
 
-echo "✅ Version $version has been committed and tagged successfully."
+version=$(node -p "require('./package.json').version")
+git tag "v$version"
+echo "🏷️  Tagged commit with 'v$version'"
+
+echo ""
+echo "✅ All done!"

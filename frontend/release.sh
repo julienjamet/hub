@@ -69,10 +69,13 @@ fi
 
 echo ""
 read -p "💬 Commit message: " message
+echo ""
 git commit -m "$message"
 
 version=$(node -p "require('./package.json').version")
 git tag "v$version"
+
+echo ""
 echo "🏷️  Tagged commit with 'v$version'"
 
 echo ""

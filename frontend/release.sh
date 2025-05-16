@@ -3,7 +3,7 @@
 set -e  # Stop on first error
 
 echo "🔍  Étape 1 : Audit de sécurité..."
-npm audit --production
+npm audit --production --audit-level high
 
 echo "✅ Aucun problème de sécurité détecté."
 
@@ -33,6 +33,9 @@ npm version $bump
 version=$(node -p "require('./package.json').version")
 
 echo ""
+echo "🛑 Étape 5 : Ajoute manuellement les fichiers à committer (ex: git add ...)"
+read -p "Appuie sur [Entrée] quand tu as terminé..."
+
 read -p "📝 Message de commit : " message
 
 echo "💾 Commit & tag..."

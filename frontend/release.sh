@@ -1,46 +1,65 @@
 #!/bin/bash
 
-set -e  # Stop on first error
+set -e  # Stop the script if any command fails
 
-echo "🔍  Étape 1 : Audit de sécurité..."
-npm audit --production --audit-level high
+echo "🔍  Step 1: Running security audit..."
+npm audit --omit=dev --audit-level high
 
-echo "✅ Aucun problème de sécurité détecté."
+echo "✅ No production vulnerabilities found."
 
-echo "🧹  Étape 2 : Lint du projet..."
+echo "🧹  Step 2: Running linter..."
 npm run lint
 
-echo "✅ Lint sans erreur."
+echo "✅ Lint passed without errors."
 
-echo "🏗️  Étape 3 : Build du projet..."
+echo "🏗️  Step 3: Building the project..."
 npm run build
 
-echo "✅ Build réussi."
+echo "✅ Build completed successfully."
 
 echo ""
-echo "📦 Étape 4 : Sélection du type de version"
-read -p "👉 Choisis le type de version (patch / minor / major) : " bump
+echo "📦 Step 4: Choose version bump type"
+echo "   [p] patch (bug fixes)"
+echo "   [m] minor (backward-compatible features)"
+echo "   [M] major (breaking changes)"
 
-if [[ "$bump" != "patch" && "$bump" != "minor" && "$bump" != "major" ]]; then
-  echo "❌ Type de version invalide. Abandon."
-  exit 1
-fi
+read -p "👉 Your choice (p/m/M): " choice
 
-echo "🔢 Bump version avec 'npm version $bump'..."
+case "$choice" in
+  p|P)
+    bump="patch"
+    ;;
+  m)
+    bump="minor"
+    ;;
+  M)
+    bump="major"
+    ;;
+  *)
+    echo "❌ Invalid choice. Aborting."
+    exit 1
+    ;;
+esac
+
+echo "🔢 Bumping version with 'npm version $bump'..."
 npm version $bump
 
-# Récupère la dernière version pour le tag
 version=$(node -p "require('./package.json').version")
 
 echo ""
-echo "🛑 Étape 5 : Ajoute manuellement les fichiers à committer (ex: git add ...)"
-read -p "Appuie sur [Entrée] quand tu as terminé..."
+echo "🛑 Step 5: Manually stage the files you want to commit (e.g. git add ...)"
+read -p "Press [Enter] when you're ready to continue..."
 
-read -p "📝 Message de commit : " message
+# Check if anything is staged for commit
+if git diff --cached --quiet; then
+  echo "❌ No files staged. Aborting commit."
+  exit 1
+fi
 
-echo "💾 Commit & tag..."
-git add .
+read -p "📝 Commit message: " message
+
+echo "💾 Committing and tagging..."
 git commit -m "$message"
 git tag "v$version"
 
-echo "✅ Version $version taguée avec succès."
+echo "✅ Version $version has been committed and tagged successfully."
